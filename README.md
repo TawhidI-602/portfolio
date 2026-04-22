@@ -11,7 +11,7 @@ A personal portfolio website built to showcase my projects, skills, and contact 
 - Projects section that automatically fetches and displays my 3 latest GitHub repositories, including language breakdowns and a language bar with a bar stat
 - Clickable contact links for email, GitHub, and LinkedIn
 
-## Tech Used
+## Languages/Technology Used
 
 - HTML5
 - CSS3
