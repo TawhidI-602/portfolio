@@ -22,7 +22,7 @@ A personal portfolio website built to showcase my projects, skills, and contact 
 The projects section uses the GitHub API to automatically pull my 3 most recently updated repositories. For each repo it displays:
 
 - Repository name
-- Description
+- Description if available
 - Language breakdown bar (inspired by GitHub's)
 - Language badges with percentages
 - Link to the GitHub repo
