@@ -28,8 +28,6 @@ The projects section uses the GitHub API to automatically pull my 3 most recentl
 - Link to the GitHub repo
 - Link to live site (if available)
 
-No manual updates needed — pushing a new project to GitHub will reflect on the site automatically.
-
 ## Author
 
 **Tawhid Iqbal**
