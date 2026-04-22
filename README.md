@@ -1,6 +1,38 @@
-# Project 1: Build Your Personal Website with AI!
-In this project, you will leverage AI and your knowledge of HTML and CSS to build a simple, single-page personal website that will showcase your projects.
+# Tawhid Iqbal — Personal Portfolio Website
 
-You will use AI to help you brainstorm design ideas, apply web development best practices, and troubleshoot issues, bringing your vision to life on screen! 
+A personal portfolio website built to showcase my projects, skills, and contact information as a web development student at ASU.
 
-Launch a Codespace to get started. **Remember to Commit and Push** your project changes to GitHub from Codespaces to prevent losing progress.
+## Features
+
+- Sticky navigation bar with smooth scrolling
+- Hero section with custom logo
+- About Me section
+- Skills section with technology icons
+- Projects section that automatically fetches and displays my 3 latest GitHub repositories, including language breakdowns and a language bar with a bar stat
+- Clickable contact links for email, GitHub, and LinkedIn
+
+## Tech Used
+
+- HTML5
+- CSS3
+- JavaScript (Fetch API, GitHub REST API)
+
+## How the Projects Section Works
+
+The projects section uses the GitHub API to automatically pull my 3 most recently updated repositories. For each repo it displays:
+
+- Repository name
+- Description
+- Language breakdown bar (inspired by GitHub's)
+- Language badges with percentages
+- Link to the GitHub repo
+- Link to live site (if available)
+
+No manual updates needed — pushing a new project to GitHub will reflect on the site automatically.
+
+## Author
+
+**Tawhid Iqbal**
+- GitHub: [github.com/TawhidI-602](https://github.com/TawhidI-602)
+- LinkedIn: [linkedin.com/in/tawhid-iqbal-35934326b](https://www.linkedin.com/in/tawhid-iqbal-35934326b)
+- Email: tiqbal1@asu.edu
