@@ -51,8 +51,6 @@ body {
 
 .hero h1 {
     font-size: 2.5rem;
-    /* Use Audiowide font for the title */
-    /*      Designed by Astigmatic      */
     font-family: 'Audiowide', sans-serif;
 }
 
@@ -64,6 +62,166 @@ body {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* Hero name row */
+.hero-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Death Stranding Like Button ── */
+.ds-like-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+.ds-like-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: visible;
+
+    /* Holographic style */
+    background: linear-gradient(135deg,
+        rgba(0, 255, 255, 0.08),
+        rgba(0, 180, 255, 0.15),
+        rgba(100, 255, 218, 0.08)
+    );
+    border: 1px solid rgba(0, 220, 255, 0.6);
+    box-shadow:
+        0 0 8px rgba(0, 220, 255, 0.4),
+        0 0 20px rgba(0, 180, 255, 0.15),
+        inset 0 0 8px rgba(0, 220, 255, 0.08);
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.ds-like-btn:hover:not(.depleted) {
+    box-shadow:
+        0 0 12px rgba(0, 220, 255, 0.7),
+        0 0 30px rgba(0, 180, 255, 0.3),
+        inset 0 0 12px rgba(0, 220, 255, 0.15);
+    border-color: rgba(0, 240, 255, 0.9);
+}
+
+.ds-like-btn.active {
+    box-shadow:
+        0 0 16px rgba(240, 192, 64, 0.7),
+        0 0 35px rgba(240, 192, 64, 0.3),
+        inset 0 0 12px rgba(240, 192, 64, 0.1);
+    border-color: rgba(240, 192, 64, 0.9);
+}
+
+.ds-like-btn.depleted {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ds-thumb {
+    font-size: 18px;
+    display: inline-block;
+    filter: drop-shadow(0 0 4px rgba(0, 220, 255, 0.8));
+}
+
+.ds-thumb.pop {
+    animation: ds-pop 0.12s ease-out;
+}
+
+@keyframes ds-pop {
+    0%   { transform: scale(1) rotate(0deg); }
+    50%  { transform: scale(1.4) rotate(-20deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.ds-like-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.ds-count {
+    font-family: 'Audiowide', sans-serif;
+    font-size: 0.75rem;
+    color: #00e5ff;
+    min-width: 36px;
+    text-align: center;
+    text-shadow: 0 0 6px rgba(0, 220, 255, 0.8);
+}
+
+.ds-count.flash {
+    animation: ds-flash 0.15s ease-out;
+}
+
+@keyframes ds-flash {
+    0%   { opacity: 1; }
+    30%  { opacity: 0; }
+    60%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.ds-like-btn.active .ds-count {
+    color: #f0c040;
+    text-shadow: 0 0 6px rgba(240, 192, 64, 0.8);
+}
+
+.ds-label {
+    font-size: 0.55rem;
+    color: rgba(0, 220, 255, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+/* Thin rectangle stamina bar */
+.ds-stamina-bar-bg {
+    width: 90px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+}
+
+.ds-stamina-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    background: #00e5ff;
+    box-shadow: 0 0 6px rgba(0, 220, 255, 0.8);
+    transition: width 0.05s linear;
+}
+
+.ds-stamina-bar.depleted {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+/* Floating blue thumbs */
+.ds-thumb-float {
+    position: fixed;
+    font-size: 16px;
+    pointer-events: none;
+    animation: ds-thumb-fly 0.9s ease-out forwards;
+    z-index: 9999;
+    filter: hue-rotate(200deg) brightness(1.4);
+}
+
+@keyframes ds-thumb-fly {
+    0%   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-60px) scale(0.6) rotate(var(--rot)); }
 }
 
 /* SECTIONS */

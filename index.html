@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Tawhid Iqbal | Web Development Student</title>
-    <!-- Add Google Fonts link here -->
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -20,19 +19,32 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="hero" id = "home">
+    <header class="hero" id="home">
         <img src="foxhound.png" alt="Foxhound Logo" class="logo">
-        <h1>Tawhid Iqbal</h1>
-        <p>Web Development Student</p>
+        <div class="hero-name-row">
+            <h1>Tawhid Iqbal</h1>
+            <div class="ds-like-wrap">
+                <button class="ds-like-btn" id="dsBtn">
+                    <span class="ds-thumb" id="dsThumb">👍</span>
+                    <div class="ds-like-inner">
+                        <span class="ds-count" id="dsCount">0</span>
+                        <span class="ds-label">likes</span>
+                    </div>
+                </button>
+                <div class="ds-stamina-bar-bg">
+                    <div class="ds-stamina-bar" id="dsStamina"></div>
+                </div>
+            </div>
+        </div>
+        <p>A Student of Computer Science</p>
     </header>
 
     <!-- ABOUT / BIO -->
     <section class="about" id="about">
         <h2>About Me</h2>
         <p>
-            I am a web development student learning how to build modern, responsive
-            websites using HTML, CSS, and JavaScript. This site showcases the
-            projects I create during my college course.
+            I am a college student studying Computer Science learning how to code and build projects for others as well as my amusement using various programming languages and tools. This site showcases the
+            projects I create during my free time. I am always learning and will do my best to reflect here with updated projects as I grow.
         </p>
     </section>
 
@@ -72,6 +84,6 @@
         <p>Please note that the logo design is copyrighted by KONAMI.</p>
     </footer>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -38,7 +38,6 @@ async function loadGitHubProjects() {
             return;
         }
 
-        // Fetch languages for each repo
         const reposWithLangs = await Promise.all(
             filtered.map(async (repo) => {
                 const langRes = await fetch(repo.languages_url);
@@ -56,7 +55,6 @@ async function loadGitHubProjects() {
             const totalBytes = Object.values(repo.languages).reduce((a, b) => a + b, 0);
             const langEntries = Object.entries(repo.languages);
 
-            // Build the color bar
             const barSegments = langEntries
                 .map(([lang, bytes]) => {
                     const color = LANG_COLORS[lang] || "#888";
@@ -65,7 +63,6 @@ async function loadGitHubProjects() {
                 })
                 .join("");
 
-            // Build language badges
             const langBadges = langEntries
                 .map(([lang, bytes]) => {
                     const color = LANG_COLORS[lang] || "#888";
@@ -106,3 +103,100 @@ async function loadGitHubProjects() {
 }
 
 loadGitHubProjects();
+
+// ── Death Stranding Like Button ──────────────────────────────────────────────
+
+const SESSION_DURATION = 7000;
+const MAX_LIKES_PER_SESSION = 300;
+
+let totalCount = parseInt(localStorage.getItem("ds-likes") || "0");
+let sessionActive = false;
+let sessionLikes = 0;
+let sessionStart = null;
+let drainInterval = null;
+let depleted = false;
+let thumbFloatThrottle = 0;
+
+const dsBtn = document.getElementById("dsBtn");
+const dsCountEl = document.getElementById("dsCount");
+const dsStaminaEl = document.getElementById("dsStamina");
+const dsThumbEl = document.getElementById("dsThumb");
+
+dsCountEl.textContent = totalCount;
+
+function spawnFloatingThumb() {
+    const now = Date.now();
+    if (now - thumbFloatThrottle < 100) return;
+    thumbFloatThrottle = now;
+
+    const rect = dsBtn.getBoundingClientRect();
+    const el = document.createElement("span");
+    el.className = "ds-thumb-float";
+    el.textContent = "👍";
+
+    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 60;
+    const y = rect.top + (Math.random() - 0.5) * 20;
+    const rot = (Math.random() - 0.5) * 40 + "deg";
+
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+    el.style.setProperty("--rot", rot);
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 900);
+}
+
+function flashCounter() {
+    dsCountEl.classList.remove("flash");
+    void dsCountEl.offsetWidth;
+    dsCountEl.classList.add("flash");
+}
+
+function startSession() {
+    if (depleted) return;
+    if (!sessionActive) {
+        sessionActive = true;
+        sessionLikes = 0;
+        sessionStart = Date.now();
+        dsBtn.classList.add("active");
+
+        drainInterval = setInterval(() => {
+            const elapsed = Date.now() - sessionStart;
+            const pct = Math.max(0, 100 - (elapsed / SESSION_DURATION) * 100);
+            dsStaminaEl.style.width = pct + "%";
+            if (elapsed >= SESSION_DURATION) endSession();
+        }, 30);
+    }
+    addLike();
+}
+
+function addLike() {
+    if (!sessionActive || depleted) return;
+    if (sessionLikes >= MAX_LIKES_PER_SESSION) { endSession(); return; }
+
+    totalCount++;
+    sessionLikes++;
+
+    flashCounter();
+    setTimeout(() => { dsCountEl.textContent = totalCount; }, 75);
+    localStorage.setItem("ds-likes", totalCount);
+
+    dsThumbEl.classList.remove("pop");
+    void dsThumbEl.offsetWidth;
+    dsThumbEl.classList.add("pop");
+
+    spawnFloatingThumb();
+}
+
+function endSession() {
+    sessionActive = false;
+    depleted = true;
+    clearInterval(drainInterval);
+    dsBtn.classList.remove("active");
+    dsBtn.classList.add("depleted");
+    dsStaminaEl.style.width = "0%";
+    dsStaminaEl.classList.add("depleted");
+}
+
+dsBtn.addEventListener("click", startSession);
+dsBtn.addEventListener("touchstart", (e) => { e.preventDefault(); startSession(); });
